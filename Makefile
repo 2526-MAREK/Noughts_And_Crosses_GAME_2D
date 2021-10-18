@@ -15,8 +15,8 @@ __start__: obj ./${APP}
 obj:
 	mkdir obj
 
-./${APP}: obj/main.o obj/MainWindowApplication.o obj/MenuView.o obj/GameView.o obj/GameBoard.o obj/crosses.o obj/circle.o
-	g++ obj/main.o obj/MainWindowApplication.o obj/MenuView.o obj/GameView.o obj/GameBoard.o obj/crosses.o obj/circle.o -o NoughtsAndCrosses -lsfml-graphics -lsfml-window -lsfml-system 
+./${APP}: obj/main.o obj/MainWindowApplication.o obj/MenuView.o obj/GameView.o obj/GameBoard.o obj/crosses.o obj/circle.o obj/OptionNewGame.o
+	g++ obj/main.o obj/MainWindowApplication.o obj/MenuView.o obj/GameView.o obj/GameBoard.o obj/crosses.o obj/circle.o obj/OptionNewGame.o -o NoughtsAndCrosses -lsfml-graphics -lsfml-window -lsfml-system 
 
 ext: ./${APP}_rozszerzony
 	rm -f core.* core; echo "2i 1+3.1i 2 ? / + ?" | ./${APP}_rozszerzony
@@ -27,8 +27,11 @@ obj/main.o: src/main.cpp inc/MainWindowApplication.hh
 obj/MainWindowApplication.o: src/MainWindowApplication.cpp inc/MainWindowApplication.hh inc/MenuView.hh
 	g++ -c ${CXXFLAGS} -o obj/MainWindowApplication.o src/MainWindowApplication.cpp		
 
-obj/MenuView.o: src/MenuView.cpp inc/MenuView.hh inc/GameView.hh 
-	g++ -c ${CXXFLAGS} -o obj/MenuView.o src/MenuView.cpp			
+obj/MenuView.o: src/MenuView.cpp inc/MenuView.hh inc/GameView.hh inc/OptionNewGame.hh
+	g++ -c ${CXXFLAGS} -o obj/MenuView.o src/MenuView.cpp	
+
+obj/OptionNewGame.o: src/OptionNewGame.cpp inc/OptionNewGame.hh 
+	g++ -c ${CXXFLAGS} -o obj/OptionNewGame.o src/OptionNewGame.cpp	
 
 obj/GameView.o: src/GameView.cpp inc/GameView.hh inc/GameBoard.hh 
 	g++ -c ${CXXFLAGS} -o obj/GameView.o src/GameView.cpp			

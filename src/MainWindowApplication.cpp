@@ -1,35 +1,30 @@
 #include "MainWindowApplication.hh"
 
 MainWindowApplication::MainWindowApplication(const sf::VideoMode& VideoModeTemp, const std::string& NameMainWindowTemp) :
- WindowApllication(VideoModeTemp, NameMainWindowTemp) , happen()
+ WindowApllication(VideoModeTemp, NameMainWindowTemp) , Happen()
+{
+
+}
+
+MainWindowApplication::MainWindowApplication(MainWindowApplication const&)
 {
 
 }
 
 void MainWindowApplication::MainLoop()
 {
-
-    MenuView Menu("MenuView.png");
+    OptionNewGame TabOptNewG = {1340, 571,1340,665,1760,571,1760,665 };
+    MenuView Menu("MenuView.png", TabOptNewG );
     GameView GameV("GameView.png");
 
     while(WindowApllication.isOpen()) //main loop program
     {
-        while(WindowApllication.pollEvent(happen))
+        while(WindowApllication.pollEvent(Happen))
         {
             showActualPositionMouseSTDout();
+            Menu.ChooseOptionNewGame(*this, GameV);
 
-            if(((happen.mouseMove.x> 1340)&&(happen.mouseMove.x< 1760)&&(happen.mouseMove.y>571)&&(happen.mouseMove.y<665))&&(sf::Mouse::isButtonPressed(sf::Mouse::Left)))
-            {
-                setBackgroundWindow(sf::Color::Black);
-                WindowApllication.draw(GameV);
-            }                
-            else
-            {
-                setBackgroundWindow(sf::Color::Black);
-                WindowApllication.draw(Menu);                                    
-            }                
-
-            if((happen.type == sf::Event::Closed) || (happen.type == sf::Event::KeyPressed && happen.key.code == sf::Keyboard::Escape))
+            if(((Happen.type == sf::Event::Closed) || (Happen.type == sf::Event::KeyPressed)) && (Happen.key.code == sf::Keyboard::Escape))
                 WindowApllication.close();
         }
         WindowApllication.display();
@@ -43,10 +38,10 @@ void MainWindowApplication::showActualPositionMouseSTDout()
 
 double MainWindowApplication::actualPositionMouseOX()
 {
-    return happen.mouseMove.x;
+    return Happen.mouseMove.x;
 }
 
 double MainWindowApplication::actualPositionMouseOY()
 {
-    return happen.mouseMove.y;
+    return Happen.mouseMove.y;
 }
