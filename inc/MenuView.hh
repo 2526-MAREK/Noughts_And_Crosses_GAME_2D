@@ -15,7 +15,8 @@ private:
 public:   
     MenuView() : txt(), TableOptionNewGame() {NamePicture ="brak";}
     MenuView(const std::string& NamePictureTemp,const OptionNewGame& TableOptionNewGameTemp);
-    void ChooseOptionNewGame(MainWindowApplication Window,  GameView GameV);
+    void ChooseOptionNewGame(MainWindowApplication& Window,  GameView& GameV);
+    void DrawMenuView(MainWindowApplication& Window);
 };
 
 #endif

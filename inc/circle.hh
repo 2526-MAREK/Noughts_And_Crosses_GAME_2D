@@ -9,9 +9,11 @@ class circle : public sf::Sprite
 private:
     std::string NamePicture;
     sf::Texture txt;        
+    sf::Vector2i Position;
 public:   
-    circle() : txt() {NamePicture ="brak";}
-    circle(const std::string& NamePictureTemp);
+    circle() : txt(), Position() {NamePicture ="brak";}
+    circle(const std::string& NamePictureTemp, sf::Vector2i& PositionTemp);
+    sf::Vector2i& takePosition() {return Position;}
 };
 
 #endif
